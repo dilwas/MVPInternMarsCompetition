@@ -1,14 +1,16 @@
-﻿using MVPInternMarsCompetition.Utilities;
+﻿using MVPInternMarsCompetition.Data;
+using MVPInternMarsCompetition.Utilities;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MVPInternMarsCompetition.Pages
 {
-    public class LoginPage : Driver
+    public class LoginPage : BaseClass
     {
         public IWebElement SignInBtn => driver.FindElement(By.XPath("//A[@class='item'][text()='Sign In']"));
         public IWebElement Email => driver.FindElement(By.XPath("(//INPUT[@type='text'])[2]"));
@@ -18,8 +20,11 @@ namespace MVPInternMarsCompetition.Pages
         public void SigninStep()
         {
             SignInBtn.Click();
-            Email.SendKeys("dilhaniwas+1@gmail.com");
-            Password.SendKeys("123456");
+            string text = File.ReadAllText(@"Data\Credentials.json");
+            var credentials = JsonSerializer.Deserialize<Credentials>(text);
+
+            Email.SendKeys(credentials.Username);
+            Password.SendKeys(credentials.Password);
             LoginBtn.Click();
         }
     }
