@@ -19,13 +19,9 @@ namespace MVPInternMarsCompetition.Utilities
             }
 
             var screenShot = ((ITakesScreenshot)driver).GetScreenshot();
-            var fileName = new StringBuilder(folderLocation);
 
-            fileName.Append(ScreenShotFileName);
-            fileName.Append(DateTime.Now.ToString("_dd-MM-yyyy_mss"));
-            fileName.Append(".jpeg");
-            screenShot.SaveAsFile(fileName.ToString(), ScreenshotImageFormat.Jpeg);
-            return fileName.ToString();
+            screenShot.SaveAsFile(folderLocation + "/" + ScreenShotFileName.ToString(), ScreenshotImageFormat.Jpeg);
+            return ScreenShotFileName.ToString();
         }
     }
 }

@@ -76,10 +76,9 @@ namespace MVPInternMarsCompetition.Utilities
                 case TestStatus.Failed:
                     logstatus = Status.Fail;
                     DateTime time = DateTime.Now;
-                    String fileName = "Screenshot_" +time.ToString("h_mm_ss") + ".png";
+                    String fileName = "Screenshot_" + DateTime.Now.ToString("_dd-MM-yyyy_mss") + ".jpeg";
                     String screenShotPath = CommonMethod.SaveScreenshot(driver, fileName);
-                    test.Log(Status.Fail, "Fail");
-                    test.Log(Status.Fail, "Snapshot below: " + test.AddScreenCaptureFromPath("Screenshots\\" +fileName));
+                    test.Log(Status.Fail, "Snapshot above: " + test.AddScreenCaptureFromPath("Screenshots\\" + fileName));
                     break;
                 case TestStatus.Inconclusive:
                     logstatus = Status.Warning;
